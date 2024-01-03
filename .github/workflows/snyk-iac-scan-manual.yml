@@ -1,0 +1,28 @@
+name: snyk-iac-scan-manual
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  Build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Check out Code
+        uses: actions/checkout@v3
+
+      # Install and Authenticate to Snyk
+      - name: Install Snyk & Authenticate
+        run: |
+          sudo npm install -g snyk
+          sudo npm i -g snyk-filter
+          snyk --version
+          snyk auth ${{secrets.SNYK_AUTH}}
+          snyk config set org=${{secrets.SNYK_ORG}}
+
+      - name: Snyk IaC # Remove || true to fail if there are vulnerabilities
+        run: |
+            ls -la
+            snyk iac test --report
