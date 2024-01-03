@@ -29,7 +29,7 @@ jobs:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
-      - name: Terraform config 
+      - name: Terraform config Module-1
         run: |
             ls -la
             cd modules/module-1
@@ -41,5 +41,7 @@ jobs:
       - name: Snyk IaC # Remove || true to fail if there are vulnerabilities
         run: |
             ls -la
-#            snyk iac test --report
+            cd modules/module-1
+            ls -la
+            snyk iac test tf-plan.json --report
             
