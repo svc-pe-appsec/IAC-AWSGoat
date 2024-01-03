@@ -36,10 +36,10 @@ jobs:
             terraform init
             terraform plan -out=tfplan.binary
             terraform show -json tfplan.binary > tf-plan.json
-            cat tf-plan.json
+            ls -la
             
-#      - name: Snyk IaC # Remove || true to fail if there are vulnerabilities
-#        run: |
-#            ls -la
+      - name: Snyk IaC # Remove || true to fail if there are vulnerabilities
+        run: |
+            ls -la
 #            snyk iac test --report
             
