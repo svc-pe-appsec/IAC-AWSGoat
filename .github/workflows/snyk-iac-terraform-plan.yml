@@ -24,7 +24,10 @@ jobs:
 
       - name: Terraform config 
         run: |
-            which terraform
+            ls -la
+            cd modules/module-1
+            terraform init
+            ls -la
             
 #      - name: Snyk IaC # Remove || true to fail if there are vulnerabilities
 #        run: |
